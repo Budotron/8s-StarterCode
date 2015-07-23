@@ -1,0 +1,110 @@
+# how to compute and table y-values example
+x<- -3:3
+y<-2*x+1
+rbind(x,y)
+
+# how to plot a line example (you have to load the previous code for
+# this to work)
+plot(x = x, y = y, type = "l", panel.first = grid(), axes=F)
+abline(v=0, h=0);
+axis(1, pos=0)
+axis(2, pos=0);
+
+# create interactive plot for exploring the effects of m in y=mx
+require(manipulate)
+library(manipulate)
+manipulate(
+{plot(x<-seq(from = -3,
+             to = 3, 
+             by = .02), 
+      y=m*x, 
+      type = "l", 
+      ylim = c(-5,5),
+      panel.first = grid(),
+      axes =F, 
+      col="red", 
+      lwd=3);
+ abline(v=0, h=0);
+ axis(1, pos=0)
+ axis(2, pos=0);
+},
+m=slider(min = -4,max = 4, initial = 1)
+)
+
+# create interactive plot for exploring the effect of changing (x_2, y_2)
+# on m, when (x_1, y_1) is fixed at the origin
+require(manipulate)
+library(manipulate)
+manipulate(
+{plot(x<-seq(from = -3,
+             to = 3, 
+             by = .02), 
+      y=(y_2/(x_2))*x, 
+      type = "l", 
+      ylim = c(-5,5),
+      panel.first = grid(), 
+      axes =F, 
+      col="red", 
+      lwd=3);
+ abline(v=0, h=0);
+ axis(1, pos=0)
+ axis(2, pos=0);
+ col <- 'red';
+ points(x_2,y = y_2,pch=21,cex=1.5,col=col,bg=col);
+ col <- 'blue';
+ points(x = 0,y = 0,pch=21,cex=1.5,col=col,bg=col);
+},
+y_2=slider(min = -3, 3, initial = 1, step = .5),
+x_2=slider(min = -3, 3, initial = 1, step = .5)
+)
+
+
+# create interactive plot for exploring the effect of introducing c
+require(manipulate)
+library(manipulate)
+  manipulate(
+  {plot(x<-seq(from = -3,
+               to = 3, 
+               by = .02), 
+        y=m*x+c, 
+        type = "l", 
+        ylim = c(-5,5),
+        panel.first = grid(), 
+        axes =F, 
+        col="red", 
+        lwd=3);
+   abline(v=0, h=0);
+   axis(1, pos=0)
+   axis(2, pos=0)
+  },
+  m=slider(min = -4,max = 4, initial = 1),
+  c=slider(min = -4, max = 4, initial = 0)
+  )
+
+#create interactive plot for exploring the effects of changing (x_2, y_2)
+# and c simultaneously
+require(manipulate)
+library(manipulate)
+manipulate(
+{plot(x<-seq(from = -3,
+             to = 3, 
+             by = .02), 
+      y=((y_2-c)/(x_2-0))*x+c, 
+      type = "l", 
+      ylim = c(-5,5),
+      panel.first = grid(), 
+      axes =F, 
+      col="red", 
+      lwd=3);
+ abline(v=0, h=0);
+ axis(1, pos=0)
+ axis(2, pos=0);
+ col <- 'red';
+ points(x_2,y = y_2,pch=21,cex=1.5,col=col,bg=col);
+ col <- 'blue';
+ points(x = 0,y = c,pch=21,cex=1.5,col=col,bg=col);
+},
+y_2=slider(min = -3, 3, initial = 1, step = .5),
+x_2=slider(min = -3, 3, initial = 1, step = .5),
+c=slider(min = -3, 3, initial = 1, step = .5)
+)
